@@ -215,6 +215,38 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         }
     }
 
+    // International student ref number verification
+    elseif ($_GET["url"] == "ref-number-verify") {
+        if (isset($_SESSION["_foreignFormToken"]) && !empty($_SESSION["_foreignFormToken"]) && isset($_POST["_FFToken"]) && !empty($_POST["_FFToken"]) && $_POST["_FFToken"] == $_SESSION["_foreignFormToken"]) {
+
+            if (!isset($_POST["ref_number"]) || empty($_POST["ref_number"])) {
+                die(json_encode(array("success" => false, "message" => "Reference Number is required!")));
+            }
+
+            $ref_number = $expose->validateText($_POST["ref_number"]);
+            $result = $admin->verifyInternationalApplicantRefNumber($ref_number);
+            if (empty($result)) die(json_encode(array("success" => false, "message" => "No match found for provided reference number!")));
+            die(json_encode(array("success" => true, "message" => $result)));
+        } else {
+            die(json_encode(array("success" => false, "message" => "Invalid request!")));
+        }
+    }
+
+    // International student ref number verification
+    elseif ($_GET["url"] == "sell-international-form") {
+        if (isset($_SESSION["_foreignFormToken"]) && !empty($_SESSION["_foreignFormToken"]) && isset($_POST["_FFToken"]) && !empty($_POST["_FFToken"]) && $_POST["_FFToken"] == $_SESSION["_foreignFormToken"]) {
+
+            if (!isset($_POST["ref_number"]) || empty($_POST["ref_number"])) {
+                die(json_encode(array("success" => false, "message" => "Reference Number is required!")));
+            }
+
+            $ref_number = $expose->validateText($_POST["ref_number"]);
+            die(json_encode($admin->sellInternationalForm($ref_number)));
+        } else {
+            die(json_encode(array("success" => false, "message" => "Invalid request!")));
+        }
+    }
+
     //
     elseif ($_GET["url"] == "apps-data") {
     }

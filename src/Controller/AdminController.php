@@ -372,9 +372,14 @@ class AdminController
             }
 
             $user_data = array(
-                "first_name" => $mainBranch, "last_name" => $v_branch, "user_name" => $v_email,
-                "user_role" => "Vendors", "vendor_company" => $mainBranch,
-                "vendor_phone" => $v_phone, "vendor_branch" => $v_branch, "vendor_role" => $v_role
+                "first_name" => $mainBranch,
+                "last_name" => $v_branch,
+                "user_name" => $v_email,
+                "user_role" => "Vendors",
+                "vendor_company" => $mainBranch,
+                "vendor_phone" => $v_phone,
+                "vendor_branch" => $v_branch,
+                "vendor_role" => $v_role
             );
 
             $vendor_id = time() + $i;
@@ -595,8 +600,12 @@ class AdminController
         // Create insert query
         $query1 = "INSERT INTO sys_users (`first_name`, `last_name`, `user_name`, `password`, `role`, `type`) VALUES(:fn, :ln, :un, :pw, :rl, :tp)";
         $params1 = array(
-            ":fn" => $user_data["first_name"], ":ln" => $user_data["last_name"], ":un" => $user_data["user_name"],
-            ":pw" => $hashed_pw, ":rl" => $user_data["user_role"], ":tp" => $user_data["user_type"]
+            ":fn" => $user_data["first_name"],
+            ":ln" => $user_data["last_name"],
+            ":un" => $user_data["user_name"],
+            ":pw" => $hashed_pw,
+            ":rl" => $user_data["user_role"],
+            ":tp" => $user_data["user_type"]
         );
 
         // execute query
@@ -611,8 +620,11 @@ class AdminController
         $query2 = "INSERT INTO `sys_users_privileges` (`user_id`, `select`,`insert`,`update`,`delete`) 
                 VALUES(:ui, :s, :i, :u, :d)";
         $params2 = array(
-            ":ui" => $sys_user[0]["id"], ":s" => $privileges["select"], ":i" => $privileges["insert"],
-            ":u" => $privileges["update"], ":d" => $privileges["delete"]
+            ":ui" => $sys_user[0]["id"],
+            ":s" => $privileges["select"],
+            ":i" => $privileges["insert"],
+            ":u" => $privileges["update"],
+            ":d" => $privileges["delete"]
         );
 
         // Execute user privileges 
@@ -626,10 +638,15 @@ class AdminController
             $query1 = "INSERT INTO vendor_details (`id`, `type`, `company`, `company_code`, `branch`, `role`, `phone_number`, `user_id`, `api_user`) 
                         VALUES(:id, :tp, :cp, :cc, :bh, :vr, :pn, :ui, :au)";
             $params1 = array(
-                ":id" => $vendor_id, ":tp" => "VENDOR", ":cp" => $user_data["vendor_company"],
-                ":cc" => strtoupper($user_data["company_code"]), ":bh" => $user_data["vendor_branch"],
-                ":vr" => $user_data["vendor_role"], ":pn" => $user_data["vendor_phone"],
-                ":ui" => $sys_user[0]["id"], ":au" => $user_data["api_user"]
+                ":id" => $vendor_id,
+                ":tp" => "VENDOR",
+                ":cp" => $user_data["vendor_company"],
+                ":cc" => strtoupper($user_data["company_code"]),
+                ":bh" => $user_data["vendor_branch"],
+                ":vr" => $user_data["vendor_role"],
+                ":pn" => $user_data["vendor_phone"],
+                ":ui" => $sys_user[0]["id"],
+                ":au" => $user_data["api_user"]
             );
             $this->dm->inputData($query1, $params1);
             $subject = "Regional Maritime University - Vendor Account";
@@ -671,16 +688,23 @@ class AdminController
         $query = "UPDATE sys_users SET `user_name` = :un, `first_name` = :fn, `last_name` = :ln, `role` = :rl, `type` = :tp 
                 WHERE id = :id";
         $params = array(
-            ":un" => $data["user-email"], ":fn" => $data["user-fname"], ":ln" => $data["user-lname"],
-            ":rl" => $data["user-role"], ":tp" => $data["user-type"], ":id" => $data["user-id"]
+            ":un" => $data["user-email"],
+            ":fn" => $data["user-fname"],
+            ":ln" => $data["user-lname"],
+            ":rl" => $data["user-role"],
+            ":tp" => $data["user-type"],
+            ":id" => $data["user-id"]
         );
         if ($this->dm->inputData($query, $params)) {
             // Create insert query for user privileges
             $query2 = "UPDATE `sys_users_privileges` SET `select` = :s, `insert` = :i,`update` = :u, `delete`= :d 
                         WHERE `user_id` = :ui";
             $params2 = array(
-                ":ui" => $data["user-id"], ":s" => $privileges["select"], ":i" => $privileges["insert"],
-                ":u" => $privileges["update"], ":d" => $privileges["delete"]
+                ":ui" => $data["user-id"],
+                ":s" => $privileges["select"],
+                ":i" => $privileges["insert"],
+                ":u" => $privileges["update"],
+                ":d" => $privileges["delete"]
             );
             // Execute user privileges 
             $action2 = $this->dm->inputData($query2, $params2);
@@ -1513,9 +1537,7 @@ class AdminController
         }
     }
 
-    private function admitWASSCELike($data)
-    {
-    }
+    private function admitWASSCELike($data) {}
 
     public function admitByCatA($data)
     {
@@ -1798,9 +1820,7 @@ class AdminController
         }
     }
 
-    private function sendAdmissionLetter(): mixed
-    {
-    }
+    private function sendAdmissionLetter(): mixed {}
 
     public function admitIndividualApplicant($appID, $progName)
     {
@@ -1829,9 +1849,7 @@ class AdminController
         return $this->dm->inputData($query, array(":i" => $appID, ":ss" => $statusState));
     }
 
-    public function sendAdmissionFiles($appID, $fileObj): mixed
-    {
-    }
+    public function sendAdmissionFiles($appID, $fileObj): mixed {}
 
     private function createStudentIndexNumber($progID): mixed
     {
@@ -1880,8 +1898,17 @@ class AdminController
             // Save Data
             $query = "INSERT INTO enrolled_applicants VALUES(`app_id`, `index_number`, `email_address`, `programme`, `first_name`, `middle_name`, `last_name`, `sex`, `dob`, `nationality`, `phone_number`)";
             $params = array(
-                $appID, $indexCreation["index_number"], $appDetails["email_addr"], $indexCreation["programme"], $appDetails["first_name"], $appDetails["middle_name"], $appDetails["last_name"],
-                $appDetails["gender"], $appDetails["dob"], $appDetails["nationality"], $appDetails["phone_no1_code"] . $appDetails["phone_no1"]
+                $appID,
+                $indexCreation["index_number"],
+                $appDetails["email_addr"],
+                $indexCreation["programme"],
+                $appDetails["first_name"],
+                $appDetails["middle_name"],
+                $appDetails["last_name"],
+                $appDetails["gender"],
+                $appDetails["dob"],
+                $appDetails["nationality"],
+                $appDetails["phone_no1_code"] . $appDetails["phone_no1"]
             );
             $addStudent = $this->dm->inputData($query, $params);
             if (!empty($addStudent)) return array("success" => true, "message" => "Applicant successfully enrolled!");;
@@ -2345,5 +2372,16 @@ class AdminController
         header("Content-Transfer-Encoding:utf-8");
         header("Content-disposition:attachment;filename=\"" . basename($file_url) . "\"");
         readfile($file_url);
+    }
+
+    public function verifyInternationalApplicantRefNumber(string $ref_number)
+    {
+        $query = "SELECT ffp.*, f.`name`, ap.`info` FROM `foreign_form_purchase_requests` AS ffp, forms AS f, admission_period AS ap 
+        WHERE ffp.`reference_number` = :r AND f.id = ffp.form AND ap.id = ffp.admission_period";
+        return $this->dm->getData($query, array(":r" => $ref_number));
+    }
+
+    public function sellInternationalForm() {
+        
     }
 }

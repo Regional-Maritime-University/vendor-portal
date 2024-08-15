@@ -1,1 +1,1 @@
-# vendor-portal
+# rmu_admissions_admin

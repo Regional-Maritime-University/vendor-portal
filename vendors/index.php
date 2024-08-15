@@ -6,6 +6,7 @@ if (!isset($_SESSION["adminLogSuccess"]) || $_SESSION["adminLogSuccess"] == fals
 }
 
 $isUser = false;
+$_SESSION["vendor_id"] = 1;
 if (strtolower($_SESSION["role"]) == "vendors" || strtolower($_SESSION["role"]) == "developers") $isUser = true;
 
 if (isset($_GET['logout']) || !$isUser) {
@@ -108,6 +109,25 @@ if (!empty($vendorData) && !empty($vendorData[0]["api_user"])) {
                                                 </div>
                                                 <div class="ps-3">
                                                     <span class="text-muted small pt-2 ps-1">forms</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div><!-- End Applications Card -->
+
+                            <!-- Applications Card -->
+                            <div class="col-xxl-3 col-md-3">
+                                <a href="foreign.php">
+                                    <div class="card info-card sales-card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">International Forms Purchase</h5>
+                                            <div class="d-flex align-items-center">
+                                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <img src="../assets/img/icons8-sell-48.png" style="width: 48px;" alt="">
+                                                </div>
+                                                <div class="ps-3">
+                                                    <span class="text-muted small pt-2 ps-1">Sell</span>
                                                 </div>
                                             </div>
                                         </div>
