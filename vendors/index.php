@@ -6,7 +6,6 @@ if (!isset($_SESSION["adminLogSuccess"]) || $_SESSION["adminLogSuccess"] == fals
 }
 
 $isUser = false;
-$_SESSION["vendor_id"] = 1;
 if (strtolower($_SESSION["role"]) == "vendors" || strtolower($_SESSION["role"]) == "developers") $isUser = true;
 
 if (isset($_GET['logout']) || !$isUser) {

@@ -22,9 +22,6 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 require "../bootstrap.php";
 
 use Src\Controller\AdminController;
-use Src\Controller\DownloadExcelDataController;
-use Src\Controller\DownloadAllExcelDataController;
-use Src\Controller\UploadExcelDataController;
 use Src\Controller\ExposeDataController;
 
 $expose = new ExposeDataController();

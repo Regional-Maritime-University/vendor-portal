@@ -2381,7 +2381,7 @@ class AdminController
         return $this->dm->getData($query, array(":r" => $ref_number));
     }
 
-    public function sellInternationalForm() {
+    public function sellInternationalForm(array $data) {
         
     }
 }

@@ -8,7 +8,7 @@ if (isset($_SESSION["adminLogSuccess"]) && $_SESSION["adminLogSuccess"] == true 
 } else {
     header("Location: ../index.php");
 }
-
+$_SESSION["vendor_id"] = 1;
 if (isset($_SESSION["vendor_id"]) && !empty($_SESSION["vendor_id"]))
     $trans_id = isset($_GET["exttrid"]) ? $_GET["exttrid"] : "";
 else header("Location: index.php");
